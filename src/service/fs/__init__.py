@@ -1,3 +1,5 @@
+from src.database.db import DBConnection
+
 class FileRepo:
     """
     This represents the server copy of a user's Git Repo, and contains
@@ -15,5 +17,23 @@ class FileRepo:
 
 class RepoManager:
     """
-    Class that manages access to FileRepo
+    Class that manages access to FileRepo. Checks 
     """
+    def __init__(self, db: DBConnection):
+        """
+        Initializes the RepoManager with a DBConnection object
+        """
+        # self.repos = get_repos_from_db()
+        pass
+
+    def get_repo(self, user_id) -> FileRepo:
+        """
+        Returns the FileRepo object for the given user_id
+        """
+        pass
+
+    def save_repo(self, user_id, repo: FileRepo):
+        """
+        Saves the FileRepo object for the given user_id
+        """
+        pass
