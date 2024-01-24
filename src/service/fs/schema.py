@@ -5,3 +5,7 @@ class SyncRepoRequest(BaseModel):
 
 class SyncRepoResponse(BaseModel):
     status: str
+
+class InitRepoRequest(BaseModel):
+    repo_url: str
+    github_access_token: str
