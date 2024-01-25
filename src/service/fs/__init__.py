@@ -1,23 +1,34 @@
+from pathlib import Path
+
 from src.database.db import DBConnection
+from src.database.fs import FileRepoModel
 
 class FileRepo:
     """
-    This represents the server copy of a user's Git Repo, and contains
-    all methods required to access and modify the repo. Once initialized, this object
-    must be kept in sync with the user's local repo on a commit by commit basis
+    Represents a copy of the user's repo on the server, and is responsible for
+    for file operation on the repo
     """
-    def __init__(self):
+    def __init__(self, 
+                 filepath: Path):
         """
         Initializes the FileRepo with the user's local repo for the first time
         """
         pass
 
-    def run_test():
+    def sync_file_diff(self,
+                       diff: str):
+        """
+        Takes diff and syncs it with the FileRepo location
+        """
         pass
 
 class RepoManager:
     """
-    Class that manages access to FileRepo. Checks 
+    Class that manages access to FileRepo. Currently only responsible for creating new and
+    getting existing FileRepo objects from the DB FileRepoModel, but in future, will also
+    handle authorization checks.
+    
+    Filepath right now can be arbitrary local path but later may be remote
     """
     def __init__(self, db: DBConnection):
         """
@@ -26,13 +37,28 @@ class RepoManager:
         # self.repos = get_repos_from_db()
         pass
 
-    def get_repo(self, user_id) -> FileRepo:
+    def create_file_repo(self, 
+                 github_access_token: str,
+                 repo_id: str) -> FileRepo:
+        # self._save_repo()
+        pass
+
+    def get_file_repo(self, 
+                      url: str) -> FileRepo:
         """
         Returns the FileRepo object for the given user_id
         """
+        # retrieve from db then convert to FileRepo
+        # FileRepoModel.find_one(FileRepoModel.url == url)
         pass
 
-    def save_repo(self, user_id, repo: FileRepo):
+    def _save_repo(self, 
+                   github_access_token: str,
+                   repo: FileRepo):
+
+        # FileRepoModel(filepath=filepath,
+        #               credentials=repo.credentials,
+        #               url=repo.url).create()
         """
         Saves the FileRepo object for the given user_id
         """

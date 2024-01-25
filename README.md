@@ -10,7 +10,8 @@ These are all of our external facing endpoints, including those that we use to i
 ## Shared:
 Code (generally, tasks) that are shared amongst the different services are implemented here
 
-Goals for Capstone:
-- finish the /init route from service/fs that clones an initial Git repo from Github. this implementation should also store repo as a FileRepo with the proper access credentials inside the DB, using the schema defined in database/repo
+## Goals for Capstone:
+- finish the /init route from service/fs that initiates a process to acquire access credentials to the user's Github. It then initializes clones the repository to a location on the server, and saves the credentials and filepath to a FileRepoModel object. The creation of a FileRepoModel is done through the RepoManager
+
 - finish the /sync route from service/fs that syncs a local user repo with our remote cloned from the step before. This route will accept a diff file that marks the changes made between the last sync and now. Assume for now that the difference between the local and the remote file is at most one commit. Required for this is also the post-commit hook (in the test_repo/.git folder), which calls post-commit.py which uploads to the server the commit diff
 

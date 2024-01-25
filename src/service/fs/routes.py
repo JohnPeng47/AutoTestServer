@@ -1,15 +1,22 @@
 from fastapi import APIRouter
 from .schema import SyncRepoRequest, SyncRepoResponse
 
+from . import FileRepo, RepoManager
+
 router = APIRouter()
 
-@router.post("/sync")
-def sync_local_user_repo(request: SyncRepoRequest,
-                         diff: str) -> SyncRepoResponse:
-    print(request.latest_commit)
+def get_fs_router(
+    repo_manager: RepoManager
+) -> APIRouter:
+    
+    @router.post("/sync")
+    def sync_local_user_repo(request: SyncRepoRequest) -> SyncRepoResponse:
+        print(request.latest_commit)
 
-    return SyncRepoResponse(status="Sync started..")
+        return SyncRepoResponse(status="Sync started..")
 
-@router.post("/initialize")
-def init_local_user_repo():
-    pass
+    @router.post("/initialize")
+    def init_local_user_repo():
+        pass
+    
+    return router

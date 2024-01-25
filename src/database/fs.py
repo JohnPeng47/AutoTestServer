@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from dataclasses import dataclass
+from beanie import Document
 
 @dataclass
 class GitCredentials:
@@ -8,7 +9,7 @@ class GitCredentials:
     """
     pass
 
-class GitRepo(BaseModel):
-    # check what kind of credentials we need to perform our operaitons
+class FileRepoModel(Document):
+    filepath: str
     credentials: GitCredentials 
     url: str
